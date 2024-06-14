@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <link rel="stylesheet" href="/css/prism.css" />
+
+    <script src="/js/prism.js"></script>
+  </head>
+  <main>
+    <pre
+      class="line-numbers"
+    ><code class="language-js">const app = Vue.createApp({
+    data() {
+        return {
+          Cards: [],
+        };
+      },
+    mounted() {
+      axios(&quot;/list.json&quot;)
+        .then((response) =&gt; (this.Cards = response.data))
+        .catch((error) =&gt; console.log(error));
+    },
+  });
+app.mount(&quot;#list&quot;); 
+</code></pre>
+  </main>
+</html>

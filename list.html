@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF=8" />
+    <title>ブログ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/bootstrap.css" rel="stylesheet" />
+    <link href="/css/bcard.css" rel="stylesheet" />
+    <link href="/css/tilesettings.css" rel="stylesheet" />
+    <link href="/css/animsition.min.css" rel="stylesheet" />
+
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/include.js"></script>
+    <script src="/js/star.js"></script>
+    <script src="/js/luxy.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/pagechange.js"></script>
+    <script src="/js/animsition.min.js"></script>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.6.2/dist/simpleParallax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js"></script>
+
+    <link rel="stylesheet" href="/css/prism.css" />
+    <script src="/js/prism.js"></script>
+    
+    <style type="text/css">
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+      }
+      .layout {
+        position: relative;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP&family=Zen+Antique&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500&display=swap" rel="stylesheet" />
+
+    <script>
+      $(document).ready(function () {
+        $('.animsition-overlay').animsition({
+          inClass: 'overlay-slide-in-left',
+          outClass: 'overlay-slide-out-right',
+          inDuration: 500,
+          outDuration: 500,
+          linkElement: '.animsition-link',
+          loading: true,
+          loadingParentElement: 'body',
+          loadingClass: 'animsition-loading',
+          loadingInner: '',
+          timeout: false,
+          timeoutCountdown: 5000,
+          onLoadEvent: true,
+          browser: ['animation-duration', '-webkit-animation-duration'],
+          overlay: true,
+          overlayClass: 'animsition-overlay-slide',
+          overlayParentElement: 'body',
+          transition: function (url) {
+            window.location.href = url;
+          },
+        });
+      });
+    </script>
+  </head>
+  <body class="animsition-overlay" data-animsition-overlay="true">
+    <canvas id="canvas" width="100%" height="100%"></canvas>
+    <div class="layout" id="luxy">
+      <div class="luxy-el" data-speed-y="5" data-offset="-50"></div>
+      <main>
+        <script>
+          include('/include/header.html');
+        </script>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col"><br /><br /></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11" id="list">
+              <div class="row sp-container">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-11 p-0 luxy-tile-b">
+                      <img id="targetImage" class="img-fluid vh-b-50 thumbnail" />
+                    </div>
+                    <div class="col-1 bg-white p-0">
+                      <div id="blogtag1" class="blog-title fs-1 text-dark"></div>
+                    </div>
+                  </div>
+                </div>
+                <div v-for="Card in raw_list_cards" class="col-3 p-0 tile-s fadeUpTrigger">
+                  <a :href="'/blog.html?page=' + Card.id" class="animsition-link">
+                    <img :data-src="Card.photo" class="img-fluid vh-s-50 lazyload" />
+                    <p class="hover-child p-1 s-title">{{Card.h1}}</p>
+                    <p class="hover-child p-1 s-tags">{{Card.tags1}}</p>
+                    <p class="hover-child p-1 s-date">{{Card.year}}/{{Card.month}}/{{Card.day}}</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          include('/include/footer.html');
+        </script>
+      </main>
+    </div>
+    <script>
+      let urlParam = window.location.search;
+      let params = new URLSearchParams(urlParam);
+      const target = document.querySelector('#targetImage');
+      tag = params.get('tag');
+      if (tag == 'blog' || tag == 'Blog') {
+        tag = 'Blog';
+        const url = '/img/blog/1.jpg';
+        target.src = url;
+      } else if (tag == 'programming' || tag == 'Programming') {
+        tag = 'Programming';
+        const url = '/img/pro/1.jpg';
+        target.src = url;
+      } else if (tag == 'food' || tag == 'Food') {
+        tag = 'Food';
+        const url = '/img/food/1.jpg';
+        target.src = url;
+      } else if (tag == 'travel' || tag == 'Travel') {
+        tag = 'Travel';
+        const url = '/img/tra/1.jpg';
+        target.src = url;
+      }
+
+      document.getElementById('blogtag1').textContent = tag;
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            Cards: [],
+          };
+        },
+        mounted() {
+          axios('/list.json')
+            .then((response) => (this.Cards = response.data))
+            .catch((error) => console.log(error));
+        },
+        computed: {
+          raw_list_cards() {
+            return this.Cards.filter((card) => {
+              return card.tags1.includes(tag);
+            });
+          },
+        },
+      });
+      app.mount('#list');
+    </script>
+  </body>
+
+  <script>
+    luxy.init({});
+  </script>
+  <script>
+    $(window).scroll(function () {
+      $('.fire1').each(function () {
+        var position = $(this).offset().top;
+        var scroll = $(window).scrollTop();
+        var windowHeight = $(window).height();
+        if (scroll > position - windowHeight) {
+          $(this).addClass('active');
+        }
+      });
+    });
+  </script>
+
+  <script>
+    function fadeAnime() {
+      // ふわっ
+      $('.fadeUpTrigger').each(function () {
+        //fadeUpTriggerというクラス名が
+        var elemPos = $(this).offset().top; //要素より、50px上の
+        var scroll = $(window).scrollTop();
+        var objH = $(this).outerHeight();
+        var windowHeight = $(window).height();
+        var objCenter = elemPos + objH;
+        if (scroll >= elemPos - windowHeight + 50) {
+          $(this).addClass('fadeUp'); // 画面内に入ったらfadeUpというクラス名を追記
+        }
+      });
+    }
+
+    // 画面をスクロールをしたら動かしたい場合の記述
+    $(window).scroll(function () {
+      fadeAnime(); /* アニメーション用の関数を呼ぶ*/
+    }); // ここまで画面をスクロールをしたら動かしたい場合の記述
+
+    // 画面が読み込まれたらすぐに動かしたい場合の記述
+    $(window).on('load', function () {
+      fadeAnime(); /* アニメーション用の関数を呼ぶ*/
+    }); // ここまで画面が読み込まれたらすぐに動かしたい場合の記述
+  </script>
+  <script>
+    const image = document.getElementsByClassName('thumbnail');
+    new simpleParallax(image, {
+      orientation: 'down',
+      scale: 1.5,
+      delay: 1,
+    });
+  </script>
+</html>

@@ -1,0 +1,48 @@
+<div class="p-5 blog_set">
+  <p>データサイエンスプログラミング3という授業でwebサイトを作れという課題が出た。</p>
+  <p>このサイトはその課題で作成されたブログサイトである。</p>
+
+  <p class="mi-h1 fs-4">BootstrapとGrid System</p>
+  <p>本サイトではコンテンツの配置にbootstrapのgrid systemを使用している。</p>
+  <p>grid systemとは、画面を12等分して、その中にコンテンツを配置することで画面幅に応じてレスポンシブ対応を行うことができる。</p>
+  <p>使い方は以下の画像の通りだ。</p>
+  <img src="/img/2/3.jpg" alt="gridsystem" />
+  <figure>
+    <figcaption class="blockquote-footer">ウェブさえ https://websae.net/twitter-bootstrap-grid-system-21060224/</figcaption>
+  </figure>
+  <p>この記事エリアでは以下のように12等分されている。</p>
+  <div class="row">
+    <div class="col-1 border">1</div>
+    <div class="col-1 border">2</div>
+    <div class="col-1 border">3</div>
+    <div class="col-1 border">4</div>
+    <div class="col-1 border">5</div>
+    <div class="col-1 border">6</div>
+    <div class="col-1 border">7</div>
+    <div class="col-1 border">8</div>
+    <div class="col-1 border">9</div>
+    <div class="col-1 border">10</div>
+    <div class="col-1 border">11</div>
+    <div class="col-1 border">12</div>
+  </div>
+  <p>ページ全体では左1カラムを空けて残りの11カラム分を記事スペースとして使っている。</p>
+  <p>また、rowの中にrowを配置したりもできるのでかなり幅広いデザインが可能になる。</p>
+  <p>その他にもbootstrapにはいろいろなクラスが用意されており、サイトを作成する上でかなりの時短になった。</p>
+  <p>例えば、以下のようなクラスがある。</p>
+  <ul style="list-style: none">
+    <li class="text-center">text-center</li>
+    <li class="fs-1">fs-1</li>
+    <li class="text-warning">text-warning</li>
+    <li class="border">border</li>
+    <li class="shadow">shadow</li>
+    <li class="fw-bold">fw-bold</li>
+    <li class="text-decoration-underline">text-decoration-underline</li>
+  </ul>
+  <p>これらのクラスを使用することで、cssを書かなくても簡単にデザインを変更することができる。</p>
+  <p class="mi-h1 fs-4">アニメーション</p>
+  <p>本サイトではかなり多くのアニメーションを実装している。</p>
+  <p>indexページではスクロールに応じたアニメーションの実行やパララックス効果、ページ移動ではカーテンが表示されるようになっている。</p>
+  <p>ページ移動時のアニメーションは単純にレスポンスが遅くなるので実装したくなかったが、背景の読み込みが遅いこととjsonの読み込みや記事の読み込みに非同期処理を行っているため読み込み遅延対策として実装している。</p>
+  <p>旧デザインの方はbarba.jsを使って記事エリアだけを更新していたが新デザインの方はjavascriptが複雑化し実装難易度が格段に上がり時間が足りなくなったため実装していない。</p>
+  <p>anime.jsなど使ってみたいライブラリはあったが流石に時間と学習リソースが足りなかった。</p>
+</div>

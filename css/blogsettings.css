@@ -1,0 +1,81 @@
+.blog_set p {
+  font-size: 17px;
+}
+.blog_set li {
+  font-size: 17px;
+}
+
+.title_title {
+  opacity: 0;
+  animation-name: faderight;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.title_tags {
+  opacity: 0;
+  animation-name: faderight;
+  animation-duration: 1s;
+  animation-delay: 0.6s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes faderight {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.ifs{
+  border: none;
+}
+
+.panlist{
+  padding: 0;
+  text-decoration: none;
+}
+
+.panlist ul {
+  display: flex;
+}
+.panlist li {
+  display: inline;
+  
+}
+.panlist li:not(:last-of-type)::after {
+  content: ">";
+  margin: 0 .6em; 
+  color: #ffffff; 
+}
+.panlist a {
+  text-decoration: none;  
+}
+
+.mi-h1 {
+  padding-top: 25px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  border-bottom: solid 8px #cce4ff;
+  position: relative;
+}
+
+.mi-h1:after {
+  position: absolute;
+  content: " ";
+  display: block;
+  border-bottom: solid 3px #5472cd;
+  bottom: -3px;
+  width: 20%;
+  
+}
+
+.ma-1{
+  background:linear-gradient(transparent 60%, #f6f 60%);
+}

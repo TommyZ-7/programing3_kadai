@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <link rel="stylesheet" href="/css/prism.css" />
+
+    <script src="/js/prism.js"></script>
+  </head>
+  <main>
+    <pre
+      class="line-numbers"
+    ><code class="language-js">let urlParam = window.location.search;
+let params = new URLSearchParams(urlParam);
+let page = params.get('page');
+axios('/list.json')
+    .then(function(data) {
+        var jsonData = data;
+        var jsonCount = Object.keys(jsonData.data)
+        if (jsonCount.includes(String((page) - 1))){
+            axios("/blogs/"+page+".html")
+                .then(response => {
+                    document.getElementById('blogcontents').innerHTML = response.data;
+                })
+                .catch(error => {
+                    console.error('外部ファイルの取得に失敗しました:', error);
+                });
+        }else{
+            axios("/blogs/404-notfound.html")
+                .then(response => {
+                    document.getElementById('blogcontents').innerHTML = response.data;
+                })
+                .catch(error => {
+                    console.error('外部ファイルの取得に失敗しました:', error);
+                });
+        }
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+app.mount(&quot;#list&quot;); 
+</code></pre>
+  </main>
+</html>

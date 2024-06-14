@@ -1,0 +1,38 @@
+<div class="row">
+  <h3 class="text-center">自己紹介</h3>
+  <div class="col-5 col-sm-12">
+    <img src="/img/icon.png" alt="icon" class="img-fluid" />
+  </div>
+  <div class="col-7 col-sm-8 offset-md-2">
+    <h3 class="text-center">TK</h3>
+    <p>hoge</p>
+    <a href="">twitter</a>
+  </div>
+  <br />
+  <br />
+  <h3 class="text-center">アーカイブ</h3>
+  <div id="list2">
+    <ul class="list-group">
+      <li v-for="Card in Cards" class="list-group-item text-truncate">
+        <a :href="Card.link">{{Card.h1}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    const app1 = Vue.createApp({
+      data() {
+        return {
+          Cards: [],
+        };
+      },
+      mounted() {
+        axios
+          .get('list.json')
+          .then((response) => (this.Cards = response.data))
+          .catch((error) => console.log(error));
+      },
+    });
+    app1.mount('#list2');
+  </script>
+</div>

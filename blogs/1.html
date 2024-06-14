@@ -1,0 +1,46 @@
+<div class="p-5 blog_set">
+  <p>データサイエンスプログラミング3という授業でwebサイトを作れという課題が出た。</p>
+  <p>このサイトはその課題で作成されたブログサイトである。</p>
+
+  <p class="mi-h1 fs-4">仕様とデザイン</p>
+  <p>ブログサイトを作るにあたって以下の点を重視した。</p>
+  <ul>
+    <li>講義で受けた言語以外は使用しない。</li>
+    <li>bootstrapを使用する。</li>
+    <li>記事のデータはjsonで一括管理する。</li>
+    <li>ヘッダーとフッターを共通化する。</li>
+    <li>urlパラメータを用いて動的に読み込む記事を変更する。</li>
+  </ul>
+  <p>まずはこれに従ってindexページを作成した。</p>
+  <div class="row">
+    <div class="col-6">
+      <a href="/img/1/5.png" rel="lightbox"><img src="/img/1/5.png" alt="“新デザイン”" class="img-fluid lazyload" /></a>
+      <p class="text-center">新デザイン</p>
+    </div>
+    <div class="col-6">
+      <a href="/img/1/4.png" rel="lightbox"><img src="/img/1/4.png" alt="“旧デザイン”" class="img-fluid lazyload" /></a>
+      <p class="text-center">旧デザイン</p>
+    </div>
+  </div>
+  <p>旧デザインは記事をそのまま一覧表示し、新デザインはジャンルごとに新着4件をタイル状に表示している。</p>
+  <p>これらの記事はjsonファイルを更新すると自動的に更新されるようになっている。</p>
+  <p>jsonを取得しているコードはこれ↓</p>
+  <iframe src="/blogs/iframes/1-1.html" class="ratio" style="height: 360px"></iframe>
+  <p>これでjsonファイルを取得し、vue.jsで管理しているCardsに代入している。</p>
+  <p>代入した変数から絞り込みをし、各々html内でv-forを使って表示させている。</p>
+  <p class="mi-h1 fs-4">動的ページの仕様</p>
+  <p>このサイトでは以下の3つのhtmlファイルを使用している。</p>
+  <ul>
+    <li>index.html</li>
+    <li>list.html</li>
+    <li>blog.html</li>
+  </ul>
+  <p>これらの内、listとblogではurlパラメータを用いて表示されるコンテンツを変更している。</p>
+  <p>urlパラメータとはWebページのURL末尾に加えられる変数を指し、ページ移動先に変数を渡せる。</p>
+  <p class="fs-4">http://hogehoge.com<span class="ma-1">?page=1</span></p>
+  <p>blog.html内で使用しているコードは以下の通りだ。</p>
+  <iframe src="/blogs/iframes/1-2.html" class="ratio" style="height: 600px"></iframe>
+  <p style="padding-top: 5px;">1~3行で取得したパラメータを変数に代入し、残りの行で存在する記事かどうかを確認した後該当記事を挿入している。</p>
+  <p>該当する記事がない場合、404ページを表示させている。</p>
+  <p>見る人が見ればめっちゃ無理やり実装していることがばれてしまうが動けばよかろうなのだ。</p>
+</div>
